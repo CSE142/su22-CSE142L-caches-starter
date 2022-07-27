@@ -4,7 +4,6 @@
 #include<archlab.hpp>
 #include"function_map.hpp"
 #include<map>
-#include"fast_URBG.hpp"
 #include"ReferenceAllocator.hpp"
 #include"SolutionAllocator.hpp"
 #include"pin_tags.h"
@@ -124,7 +123,10 @@ template<class Allocator>
 uint64_t  miss_machine(uint64_t count, uint64_t seed) {
 	auto alloc = new Allocator; // create the allocator.
 
+	STOP_TRACE();
 	exercise<Allocator>(alloc, 10000, 20, seed); // warm it up.
+	START_TRACE();
+
 
 	TAG_START_ALL("build_miss_machine", true); // For Moneta tracing
 

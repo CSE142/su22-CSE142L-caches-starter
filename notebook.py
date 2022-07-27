@@ -371,11 +371,13 @@ def plot1(file=None, df=None, field="per_element"):
 
 
 def my_render(c):
-    r = c._repr_html_()
-    if r != None:
-        return r
-    else:
-        return f'<img src="data:image/png;base64,{c._repr_png_()}">'
+    try:
+        return c._repr_html_()
+    except:
+        try:
+            return c._repr_svg_()
+        except:
+            return f'<img src="data:image/png;base64,{c._repr_png_()}">'
 
 def compare(content, headings=None):
     if headings is None:
